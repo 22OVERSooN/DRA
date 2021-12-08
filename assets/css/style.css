@@ -3,6 +3,7 @@
 }
 td, th{
     border:1px solid #dddddd;
+    font-size:20px;
     text-align:center;
-    padding:8px
+    padding:8px;
 }

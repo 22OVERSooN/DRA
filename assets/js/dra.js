@@ -22,8 +22,6 @@ function init(){
 //find the button
 var button = d3.select("#select-btn")
 
-//find the type in
-var typein = d3.select('#typein')
 
 
 init();
@@ -57,9 +55,9 @@ function information(postcode){
             var cell4  = row.insertCell(3)
             var cell5  = row.insertCell(4)
             if(category[i]===''){
-                cell1.innerHTML = 'No'
+                cell1.innerHTML = 'NO'
             } else {
-                cell1.innerHTML = 'Yes'
+                cell1.innerHTML = 'YES'
             }
             cell2.innerHTML = postcode
             cell3.innerHTML = locality[i]
