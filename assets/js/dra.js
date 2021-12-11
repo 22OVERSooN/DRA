@@ -1,49 +1,11 @@
 function init(){
-var name = 'PAKENHAM'
-console.log(name)
-//create a list to resotre the locality,state,category
-var postcode = []
-var state = []
-var category = []
-//use postcode in input cell here
-d3.json("resources/final.json").then((datas) => {
-    datas.forEach(function(d){
-        //push all the locality,state, category to list
-        if(d['locality'] === name){
-            postcode.push(d['\ufeffpostcode'])
-            state.push(d['state'])
-            category.push(d['Category'])
-        }
-    })
-    var table = document.getElementById('rows')
-    for(var i=0; i<state.length; i++) {
-        console.log(i)
-        var row = table.insertRow(-1);
-        var cell1  = row.insertCell(0)
-        var cell2  = row.insertCell(1)
-        var cell3  = row.insertCell(2)
-        var cell4  = row.insertCell(3)
-        var cell5  = row.insertCell(4)
-        if(category[i]===''){
-            cell1.innerHTML = 'NO'
-        } else {
-            cell1.innerHTML = 'YES'
-        }
-        cell2.innerHTML = postcode[i]
-        cell3.innerHTML = name
-        cell4.innerHTML = state[i]
-        cell5.innerHTML = category[i]
-    }
-})
-
 }
+init();
 
 //find the button
 var button = d3.select("#select-btn")
 var buttonName = d3.select("#select-btn-name")
 
-
-init();
 
 // Create event handlers for clicking the button pressing the search key
 button.on("click", runEnter)
@@ -125,7 +87,7 @@ function informationname(name){
     d3.json("resources/final.json").then((datas) => {
         datas.forEach(function(d){
             //push all the locality,state, category to list
-            if(d['locality'] === name.toUpperCase()){
+            if(d['locality'] === name){
                 postcode.push(d['\ufeffpostcode'])
                 console.log(name)
                 state.push(d['state'])
@@ -147,7 +109,7 @@ function informationname(name){
                 cell1.innerHTML = 'YES'
             }
             cell2.innerHTML = postcode[i]
-            cell3.innerHTML = name.toUpperCase()
+            cell3.innerHTML = name
             cell4.innerHTML = state[i]
             cell5.innerHTML = category[i]
         }
@@ -161,7 +123,7 @@ function mapname(name) {
     // var postcode = `${postcode}`
     d3.json("resources/final.json").then((datas) => {
         datas.forEach(function(d){
-            if(d['locality'] === name.toUpperCase()){
+            if(d['locality'] === name){
                 long.push(d['long'])
                 lat.push(d['lat'])
             }
@@ -191,8 +153,10 @@ function runEnter(){
     map(postcode)
 }
 function runEnter1(){
+    d3.event.preventDefault()
     var name1 = d3.select('#typein-name')
-    var name = name1.property("value").trim()
+    var name = name1.property("value").trim().toUpperCase()
+    console.log(name)
     informationname(name)
     mapname(name)
 }
